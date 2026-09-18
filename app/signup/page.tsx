@@ -10,6 +10,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   async function handleSignup() {
     if (
@@ -43,12 +44,7 @@ export default function Signup() {
       return;
     }
 
-    alert("Account created. Check your email to verify.");
-
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    setSubmitted(true);
   }
 
   return (
@@ -74,79 +70,87 @@ export default function Signup() {
         <h1>PREPRA</h1>
         <p>Bookkeeping and tax prep for small businesses</p>
 
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "12px",
-            border: "1px solid #E5E7EB",
-            borderRadius: 12,
-            background: "white",
-          }}
-        />
+        {submitted ? (
+          <p style={{ marginTop: "20px", color: COLORS.muted }}>
+            Account created. Check your email to confirm your account before logging in.
+          </p>
+        ) : (
+          <>
+            <input
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "12px",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                background: "white",
+              }}
+            />
 
-        <input
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "12px",
-            border: "1px solid #E5E7EB",
-            borderRadius: 12,
-            background: "white",
-          }}
-        />
+            <input
+              placeholder="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "12px",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                background: "white",
+              }}
+            />
 
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "12px",
-            border: "1px solid #E5E7EB",
-            borderRadius: 12,
-            background: "white",
-          }}
-        />
+            <input
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "12px",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                background: "white",
+              }}
+            />
 
-        <input
-          placeholder="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            border: "1px solid #E5E7EB",
-            borderRadius: 12,
-            background: "white",
-          }}
-        />
+            <input
+              placeholder="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px",
+                marginBottom: "20px",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                background: "white",
+              }}
+            />
 
-        <button
-          onClick={handleSignup}
-          style={{
-            width: "100%",
-            padding: "14px",
-            background: COLORS.accent,
-            color: "white",
-            border: "none",
-            borderRadius: "12px",
-            cursor: "pointer",
-          }}
-        >
-          Create account
-        </button>
+            <button
+              onClick={handleSignup}
+              style={{
+                width: "100%",
+                padding: "14px",
+                background: COLORS.accent,
+                color: "white",
+                border: "none",
+                borderRadius: "12px",
+                cursor: "pointer",
+              }}
+            >
+              Create account
+            </button>
+          </>
+        )}
 
         <p style={{ marginTop: "20px" }}>
           Already have an account? <Link href="/login">Login</Link>

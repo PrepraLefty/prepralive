@@ -278,7 +278,7 @@ export default function Dashboard() {
                     )}
                 </div>
 
-                <div style={{ display: "flex", gap: "10px" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                     <select
                         value={selectedMonth}
                         onChange={(e) =>
@@ -332,6 +332,21 @@ export default function Dashboard() {
                             ))
                         )}
                     </select>
+
+                    <button
+                        onClick={() => router.push("/tax/prepare")}
+                        style={{
+                            padding: "12px 18px",
+                            borderRadius: "12px",
+                            border: "none",
+                            background: COLORS.accent,
+                            color: "white",
+                            cursor: "pointer",
+                            fontWeight: 600,
+                        }}
+                    >
+                        Prepare Tax Packet
+                    </button>
                 </div>
             </div>
 
@@ -388,22 +403,6 @@ export default function Dashboard() {
                     }}
                 >
                     Upload Invoice
-                </button>
-
-                <button
-                    onClick={() => router.push("/tax/prepare")}
-                    style={{
-                        marginLeft: "auto",
-                        padding: "12px 18px",
-                        borderRadius: "12px",
-                        border: "none",
-                        background: COLORS.accent,
-                        color: "white",
-                        cursor: "pointer",
-                        fontWeight: 600,
-                    }}
-                >
-                    Prepare Tax Packet
                 </button>
             </section>
 
