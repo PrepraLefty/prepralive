@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { COLORS } from "@/lib/colors";
 
 const links = [
+    { href: "/dashboard", label: "Dashboard" },
     { href: "/transactions", label: "Transactions" },
     { href: "/tax/prepare", label: "Tax Prepare" },
     { href: "/invoices", label: "Invoices" },
