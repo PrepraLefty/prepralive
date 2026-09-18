@@ -77,6 +77,9 @@ export default function ForgotPassword() {
                 padding: "12px",
                 marginTop: "16px",
                 marginBottom: "20px",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                background: "white",
               }}
             />
 
