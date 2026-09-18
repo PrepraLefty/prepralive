@@ -46,6 +46,10 @@ type Invoice = {
 
 const MAX_INSIGHTS_CACHE_ENTRIES = 24;
 
+// Bump this whenever the /api/insights prompt or logic changes, so stale
+// cached entries (matching on financial data alone) get invalidated too.
+const PROMPT_VERSION = "2";
+
 function getInsightsCache(userId: string): Record<string, Insight[]> {
     try {
         const raw = localStorage.getItem(`insights-cache:${userId}`);
@@ -244,7 +248,7 @@ export default function Dashboard() {
             .map((c) => `${c.category}:${c.amount}`)
             .join(",");
 
-        const signature = `${profile.business_type}|${profile.industry}|${profile.goal}|${totalRevenue}|${totalExpenses}|${netProfit}|${categorySignature}`;
+        const signature = `${PROMPT_VERSION}|${profile.business_type}|${profile.industry}|${profile.goal}|${totalRevenue}|${totalExpenses}|${netProfit}|${categorySignature}`;
 
         const cache = getInsightsCache(user.id);
 
