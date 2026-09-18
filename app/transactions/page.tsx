@@ -220,6 +220,8 @@ export default function TransactionsPage() {
             <div
                 style={{
                     display: "flex",
+                    flexWrap: "wrap",
+                    gap: "12px",
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: 24,
@@ -321,7 +323,7 @@ export default function TransactionsPage() {
                     }}
                     style={{
                         flex: 1,
-                        minWidth: 220,
+                        minWidth: 160,
                         padding: "10px 14px",
                         borderRadius: 10,
                         border:
