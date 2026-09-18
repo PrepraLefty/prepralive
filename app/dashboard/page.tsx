@@ -44,6 +44,25 @@ type Invoice = {
     created_at: string;
 };
 
+const MAX_INSIGHTS_CACHE_ENTRIES = 24;
+
+function getInsightsCache(userId: string): Record<string, Insight[]> {
+    try {
+        const raw = localStorage.getItem(`insights-cache:${userId}`);
+        return raw ? JSON.parse(raw) : {};
+    } catch {
+        return {};
+    }
+}
+
+function setInsightsCache(userId: string, cache: Record<string, Insight[]>) {
+    try {
+        localStorage.setItem(`insights-cache:${userId}`, JSON.stringify(cache));
+    } catch {
+        // localStorage unavailable (private browsing, quota exceeded) - not fatal
+    }
+}
+
 export default function Dashboard() {
     const router = useRouter();
     const { user, loading: authLoading } = useAuth();
@@ -204,7 +223,16 @@ export default function Dashboard() {
         }));
     }, [filteredTransactions]);
     useEffect(() => {
-        if (!profile) return;
+        if (!profile || !user) return;
+
+        const signature = `${profile.business_type}|${profile.industry}|${profile.goal}|${totalRevenue}|${totalExpenses}|${netProfit}`;
+
+        const cache = getInsightsCache(user.id);
+
+        if (cache[signature]) {
+            setInsights(cache[signature]);
+            return;
+        }
 
         const timeoutId = setTimeout(() => {
             async function fetchInsights() {
@@ -224,11 +252,27 @@ export default function Dashboard() {
 
                     const data = await res.json();
 
-                    setInsights(
+                    const nextInsights =
                         typeof data === "string"
                             ? JSON.parse(data)
-                            : data || []
-                    );
+                            : data || [];
+
+                    if (!Array.isArray(nextInsights)) {
+                        setInsights([]);
+                        return;
+                    }
+
+                    setInsights(nextInsights);
+
+                    const updatedCache = getInsightsCache(user.id);
+                    const keys = Object.keys(updatedCache);
+
+                    if (keys.length >= MAX_INSIGHTS_CACHE_ENTRIES) {
+                        delete updatedCache[keys[0]];
+                    }
+
+                    updatedCache[signature] = nextInsights;
+                    setInsightsCache(user.id, updatedCache);
                 } catch (e) {
                     console.error(e);
                 }
@@ -238,7 +282,7 @@ export default function Dashboard() {
         }, 800);
 
         return () => clearTimeout(timeoutId);
-    }, [profile, totalRevenue, totalExpenses, netProfit]);
+    }, [user, profile, totalRevenue, totalExpenses, netProfit]);
 
     if (authLoading || loading) {
         return (
