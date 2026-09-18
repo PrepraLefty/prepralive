@@ -262,6 +262,8 @@ export default function Dashboard() {
                 style={{
                     marginBottom: 30,
                     display: "flex",
+                    flexWrap: "wrap",
+                    gap: "12px",
                     justifyContent: "space-between",
                     alignItems: "flex-start",
                 }}
@@ -337,6 +339,7 @@ export default function Dashboard() {
             <section
                 style={{
                     display: "flex",
+                    flexWrap: "wrap",
                     gap: "12px",
                     marginBottom: "24px",
                 }}
@@ -431,10 +434,8 @@ export default function Dashboard() {
 
             {/* REVENUE + RECENT ACTIVITY */}
             <section
+                className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4"
                 style={{
-                    display: "grid",
-                    gridTemplateColumns: "2fr 1fr",
-                    gap: 16,
                     marginTop: 20,
                 }}
             >
@@ -452,7 +453,7 @@ export default function Dashboard() {
 
                     <ResponsiveContainer width="100%" height="85%">
                         <LineChart data={chartData}>
-                            <XAxis dataKey="name" />
+                            <XAxis dataKey="name" interval="preserveStartEnd" />
                             <YAxis />
                             <Tooltip />
                             <Line dataKey="revenue" stroke={COLORS.accent} />
