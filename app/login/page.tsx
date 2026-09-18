@@ -1,0 +1,125 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+
+export default function Login() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleLogin() {
+    if (!email.trim() || !password.trim()) {
+      alert("Enter email and password");
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    const user = data.user;
+
+    if (!user) {
+      alert("Login failed");
+      return;
+    }
+
+    // Check if user already completed onboarding
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+    if (!profile) {
+      router.push("/onboarding");
+    } else {
+      router.push("/dashboard");
+    }
+  }
+
+  return (
+    <main
+      className="px-4"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#F8FBFC",
+      }}
+    >
+      <div
+        className="w-full max-w-[380px]"
+        style={{
+          background: "white",
+          padding: "40px",
+          borderRadius: "20px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+        }}
+      >
+        <h1>PREPRA</h1>
+        <p>Bookkeeping and tax prep for small businesses</p>
+
+        <input
+          placeholder="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "12px",
+          }}
+        />
+
+        <input
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "20px",
+          }}
+        />
+
+        <button
+          onClick={handleLogin}
+          style={{
+            width: "100%",
+            padding: "14px",
+            background: "#19C7C1",
+            color: "white",
+            border: "none",
+            borderRadius: "12px",
+            cursor: "pointer",
+          }}
+        >
+          Log In
+        </button>
+
+        <p style={{ marginTop: "16px" }}>
+          <Link href="/forgot-password" style={{ color: "#64748B", fontSize: 14 }}>
+            Forgot password?
+          </Link>
+        </p>
+
+        <p style={{ marginTop: "12px" }}>
+          New here? <Link href="/signup">Create account</Link>
+        </p>
+      </div>
+    </main>
+  );
+}
