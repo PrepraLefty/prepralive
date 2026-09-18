@@ -7,8 +7,15 @@ const client = new OpenAI({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { profile, revenue, expenses, netProfit } = body;
+    const { profile, revenue, expenses, netProfit, expensesByCategory } = body;
     const { business_type: businessType, industry, goal } = profile ?? {};
+
+    const categoryBreakdown =
+      Array.isArray(expensesByCategory) && expensesByCategory.length > 0
+        ? expensesByCategory
+            .map((c: { category: string; amount: number }) => `${c.category}: £${c.amount}`)
+            .join(", ")
+        : "No categorised expenses yet";
 
     const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
@@ -16,9 +23,13 @@ export async function POST(req: Request) {
         {
           role: "user",
           content: `
-You are a financial AI assistant.
+You are a financial assistant for PREPRA, a plain, professional bookkeeping app for small businesses and tradespeople. Match that tone exactly.
 
-Return ONLY valid JSON array.
+Rules:
+- Do not use emojis or decorative symbols anywhere in the output.
+- Do not use vague corporate phrasing (e.g. "leverage", "optimize your strategy", "synergy", "unlock potential"). Write plainly and directly.
+- Be specific: reference the actual figures and category names given below rather than speaking abstractly. If a category stands out (largest expense, unusually high, etc.), name it and its amount.
+- Return ONLY a valid JSON array. No markdown formatting, no code fences, no commentary outside the array.
 
 User:
 - Business type: ${businessType}
@@ -27,6 +38,7 @@ User:
 - Revenue: £${revenue}
 - Expenses: £${expenses}
 - Net profit: £${netProfit}
+- Expense breakdown by category: ${categoryBreakdown}
 
 Format:
 [
@@ -38,7 +50,6 @@ Format:
 ]
 
 Max 3 insights.
-Keep it practical.
           `,
         },
       ],

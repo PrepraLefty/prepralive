@@ -175,6 +175,21 @@ export default function Dashboard() {
 
     const netProfit = totalRevenue - totalExpenses;
 
+    const expensesByCategory = useMemo(() => {
+        const totals: Record<string, number> = {};
+
+        filteredTransactions
+            .filter((t) => t.type === "expense")
+            .forEach((t) => {
+                const category = t.category || "Uncategorised";
+                totals[category] = (totals[category] || 0) + Number(t.amount);
+            });
+
+        return Object.entries(totals)
+            .map(([category, amount]) => ({ category, amount }))
+            .sort((a, b) => b.amount - a.amount);
+    }, [filteredTransactions]);
+
     const outstandingInvoices = useMemo(() => {
         if (selectedMonth === "all") {
             return invoices.reduce((sum, i) => sum + Number(i.amount || 0), 0);
@@ -225,7 +240,11 @@ export default function Dashboard() {
     useEffect(() => {
         if (!profile || !user) return;
 
-        const signature = `${profile.business_type}|${profile.industry}|${profile.goal}|${totalRevenue}|${totalExpenses}|${netProfit}`;
+        const categorySignature = expensesByCategory
+            .map((c) => `${c.category}:${c.amount}`)
+            .join(",");
+
+        const signature = `${profile.business_type}|${profile.industry}|${profile.goal}|${totalRevenue}|${totalExpenses}|${netProfit}|${categorySignature}`;
 
         const cache = getInsightsCache(user.id);
 
@@ -242,6 +261,7 @@ export default function Dashboard() {
                         revenue: totalRevenue,
                         expenses: totalExpenses,
                         netProfit,
+                        expensesByCategory,
                     };
 
                     const res = await fetch("/api/insights", {
@@ -282,7 +302,7 @@ export default function Dashboard() {
         }, 800);
 
         return () => clearTimeout(timeoutId);
-    }, [user, profile, totalRevenue, totalExpenses, netProfit]);
+    }, [user, profile, totalRevenue, totalExpenses, netProfit, expensesByCategory]);
 
     if (authLoading || loading) {
         return (
@@ -587,7 +607,7 @@ export default function Dashboard() {
                         <div key={i.title} style={{ marginBottom: 14 }}>
                             <strong>{i.title}</strong>
                             <p>{i.reason}</p>
-                            <p>👉 {i.action}</p>
+                            <p>{i.action}</p>
                         </div>
                     ))
                 ) : (
