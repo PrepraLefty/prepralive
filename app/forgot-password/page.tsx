@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { COLORS } from "@/lib/colors";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ export default function ForgotPassword() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#F8FBFC",
+        background: COLORS.background,
       }}
     >
       <div
@@ -57,12 +58,12 @@ export default function ForgotPassword() {
         <p>Bookkeeping and tax prep for small businesses</p>
 
         {sent ? (
-          <p style={{ marginTop: "20px", color: "#64748B" }}>
+          <p style={{ marginTop: "20px", color: COLORS.muted }}>
             If an account exists for that email, we&apos;ve sent a link to reset your password.
           </p>
         ) : (
           <>
-            <p style={{ marginTop: "20px", color: "#64748B" }}>
+            <p style={{ marginTop: "20px", color: COLORS.muted }}>
               Enter your email and we&apos;ll send you a link to reset your password.
             </p>
 
@@ -85,7 +86,7 @@ export default function ForgotPassword() {
               style={{
                 width: "100%",
                 padding: "14px",
-                background: sending ? "#9ADBD8" : "#19C7C1",
+                background: sending ? "#9ADBD8" : COLORS.accent,
                 color: "white",
                 border: "none",
                 borderRadius: "12px",

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { COLORS } from "@/lib/colors";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -58,7 +59,7 @@ export default function Signup() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#F8FBFC",
+        background: COLORS.background,
       }}
     >
       <div
@@ -125,7 +126,7 @@ export default function Signup() {
           style={{
             width: "100%",
             padding: "14px",
-            background: "#19C7C1",
+            background: COLORS.accent,
             color: "white",
             border: "none",
             borderRadius: "12px",

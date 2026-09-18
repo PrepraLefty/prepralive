@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
+import { COLORS } from "@/lib/colors";
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -68,7 +69,7 @@ export default function ResetPassword() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#F8FBFC",
+        background: COLORS.background,
       }}
     >
       <div
@@ -81,7 +82,7 @@ export default function ResetPassword() {
         }}
       >
         <h1>PREPRA</h1>
-        <p style={{ color: "#64748B" }}>Choose a new password for your account.</p>
+        <p style={{ color: COLORS.muted }}>Choose a new password for your account.</p>
 
         <input
           placeholder="New password"
@@ -114,7 +115,7 @@ export default function ResetPassword() {
           style={{
             width: "100%",
             padding: "14px",
-            background: saving ? "#9ADBD8" : "#19C7C1",
+            background: saving ? "#9ADBD8" : COLORS.accent,
             color: "white",
             border: "none",
             borderRadius: "12px",

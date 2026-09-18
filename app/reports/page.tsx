@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/lib/useAuth";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 export default function Reports() {
     const router = useRouter();
@@ -32,7 +33,7 @@ export default function Reports() {
         <main
             style={{
                 minHeight: "100vh",
-                background: "#F8FBFC",
+                background: COLORS.background,
                 padding: "40px",
             }}
         >
@@ -47,14 +48,14 @@ export default function Reports() {
             >
                 <h1 style={{ marginBottom: 12 }}>Reports</h1>
 
-                <p style={{ color: "#6B7280", maxWidth: 480, margin: "0 auto" }}>
+                <p style={{ color: COLORS.muted, maxWidth: 480, margin: "0 auto" }}>
                     Reports are coming soon. In the meantime, you can find revenue,
                     expense, and profit breakdowns on your{" "}
-                    <a href="/dashboard" style={{ color: "#19C7C1", fontWeight: 600 }}>
+                    <a href="/dashboard" style={{ color: COLORS.accent, fontWeight: 600 }}>
                         dashboard
                     </a>{" "}
                     and{" "}
-                    <a href="/tax/prepare" style={{ color: "#19C7C1", fontWeight: 600 }}>
+                    <a href="/tax/prepare" style={{ color: COLORS.accent, fontWeight: 600 }}>
                         tax prep
                     </a>{" "}
                     pages.

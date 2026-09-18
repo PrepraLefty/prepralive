@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { COLORS } from "@/lib/colors";
 
 export default function Login() {
   const router = useRouter();
@@ -56,7 +57,7 @@ export default function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#F8FBFC",
+        background: COLORS.background,
       }}
     >
       <div
@@ -100,7 +101,7 @@ export default function Login() {
           style={{
             width: "100%",
             padding: "14px",
-            background: "#19C7C1",
+            background: COLORS.accent,
             color: "white",
             border: "none",
             borderRadius: "12px",
@@ -111,7 +112,7 @@ export default function Login() {
         </button>
 
         <p style={{ marginTop: "16px" }}>
-          <Link href="/forgot-password" style={{ color: "#64748B", fontSize: 14 }}>
+          <Link href="/forgot-password" style={{ color: COLORS.muted, fontSize: 14 }}>
             Forgot password?
           </Link>
         </p>

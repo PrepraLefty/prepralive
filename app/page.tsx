@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { COLORS } from "@/lib/colors";
 
 const features = [
   {
@@ -21,7 +22,7 @@ export default function Home() {
       className="px-4"
       style={{
         minHeight: "100vh",
-        background: "#F8FBFC",
+        background: COLORS.background,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -51,7 +52,7 @@ export default function Home() {
           style={{
             marginTop: 16,
             fontSize: 18,
-            color: "#64748B",
+            color: COLORS.muted,
           }}
         >
           Simple bookkeeping and tax prep for freelancers, sole traders, and
@@ -73,7 +74,7 @@ export default function Home() {
             style={{
               padding: "14px 28px",
               borderRadius: 12,
-              background: "#19C7C1",
+              background: COLORS.accent,
               color: "white",
               fontWeight: 700,
               textDecoration: "none",
@@ -132,7 +133,7 @@ export default function Home() {
               style={{
                 marginTop: 8,
                 fontSize: 14,
-                color: "#64748B",
+                color: COLORS.muted,
               }}
             >
               {feature.description}

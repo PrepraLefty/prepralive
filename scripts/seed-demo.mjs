@@ -170,7 +170,7 @@ function buildTransactions() {
       category: "Client Work",
       amount: randomFloat(800, 4500),
       transaction_date: toDateString(cursor),
-      source: "Invoice",
+      source: "manual",
     });
 
     cursor = new Date(cursor);
@@ -209,7 +209,7 @@ function buildTransactions() {
     transactions.push({
       type: "expense",
       description,
-      category: null,
+      category: "",
       amount: randomFloat(20, 150),
       transaction_date: toDateString(randomDateInRange(startDate, now)),
       source: "manual",

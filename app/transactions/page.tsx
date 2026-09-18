@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 type Transaction = {
     id: string;
     user_id: string;
     type: "income" | "expense";
     amount: number;
-    category: string | null;
+    category: string;
     description: string | null;
     transaction_date: string;
     source: string | null;
@@ -211,7 +212,7 @@ export default function TransactionsPage() {
         <main
             style={{
                 padding: 32,
-                background: "#F8FAFC",
+                background: COLORS.background,
                 minHeight: "100vh",
             }}
         >
@@ -237,7 +238,7 @@ export default function TransactionsPage() {
 
                     <p
                         style={{
-                            color: "#64748B",
+                            color: COLORS.muted,
                             marginTop: 8,
                         }}
                     >
@@ -249,7 +250,7 @@ export default function TransactionsPage() {
                 <button
                     onClick={() => router.push("/transactions/new")}
                     style={{
-                        background: "#19C7C1",
+                        background: COLORS.accent,
                         color: "white",
                         border: "none",
                         padding: "12px 18px",
@@ -291,7 +292,7 @@ export default function TransactionsPage() {
                 <KpiCard
                     title="Transactions"
                     value={totals.count.toString()}
-                    colour="#19C7C1"
+                    colour={COLORS.accent}
                 />
 
             </section>
@@ -427,7 +428,7 @@ export default function TransactionsPage() {
                         style={{
                             padding: 40,
                             textAlign: "center",
-                            color: "#64748B",
+                            color: COLORS.muted,
                         }}
                     >
                         Loading transactions...
@@ -449,7 +450,7 @@ export default function TransactionsPage() {
 
                         <p
                             style={{
-                                color: "#64748B",
+                                color: COLORS.muted,
                             }}
                         >
                             Add transactions or adjust your filters.
@@ -475,7 +476,7 @@ export default function TransactionsPage() {
                             <tr
                                 style={{
                                     background:
-                                        "#F8FAFC",
+                                        COLORS.background,
                                     textAlign:
                                         "left",
                                 }}
@@ -701,7 +702,7 @@ export default function TransactionsPage() {
 
                     <span
                         style={{
-                            color: "#64748B",
+                            color: COLORS.muted,
                             fontSize: 14,
                         }}
                     >
@@ -763,7 +764,7 @@ function KpiCard({
             <p
                 style={{
                     margin: 0,
-                    color: "#64748B",
+                    color: COLORS.muted,
                     fontSize: 14,
                 }}
             >
@@ -802,7 +803,7 @@ const thStyle = {
 
     fontSize: 13,
 
-    color: "#64748B",
+    color: COLORS.muted,
 
     fontWeight: 600,
 

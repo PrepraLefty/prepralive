@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/useAuth";
 import { buildTaxPacket } from "@/lib/tax/buildTaxPacket";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 type TaxPacket = Awaited<ReturnType<typeof buildTaxPacket>>;
 
@@ -18,6 +19,25 @@ function getTaxYearRange(taxYear: string) {
         label: `6 April ${startYear} - 5 April ${endYear}`,
         filenameSuffix: `${startYear}-${endYear}`,
     };
+}
+
+// UK tax years run 6 April - 5 April. Before 6 April, "today" still falls
+// in the tax year that started the previous calendar year.
+function getCurrentTaxYearStartYear(date: Date): number {
+    const year = date.getFullYear();
+    const aprilSixth = new Date(year, 3, 6);
+
+    return date >= aprilSixth ? year : year - 1;
+}
+
+function formatTaxYear(startYear: number): string {
+    return `${startYear} / ${startYear + 1}`;
+}
+
+function getTaxYearOptions(currentStartYear: number, yearsBack: number): string[] {
+    return Array.from({ length: yearsBack + 1 }, (_, i) =>
+        formatTaxYear(currentStartYear - i)
+    );
 }
 
 function escapeCsvField(value: string): string {
@@ -75,8 +95,18 @@ export default function TaxPacketPage() {
     const [loading, setLoading] = useState(true);
 
 
-    const [taxYear, setTaxYear] = useState(
-        "2025 / 2026"
+    const currentTaxYearStartYear = useMemo(
+        () => getCurrentTaxYearStartYear(new Date()),
+        []
+    );
+
+    const taxYearOptions = useMemo(
+        () => getTaxYearOptions(currentTaxYearStartYear, 4),
+        [currentTaxYearStartYear]
+    );
+
+    const [taxYear, setTaxYear] = useState(() =>
+        formatTaxYear(currentTaxYearStartYear)
     );
 
     const taxYearRange = useMemo(
@@ -219,7 +249,7 @@ export default function TaxPacketPage() {
         <main
             style={{
                 padding: 32,
-                background:"#F8FAFC",
+                background:COLORS.background,
                 minHeight:"100vh",
             }}
         >
@@ -248,7 +278,7 @@ export default function TaxPacketPage() {
 
                     <p
                         style={{
-                            color:"#64748B",
+                            color:COLORS.muted,
                             marginTop:8,
                         }}
                     >
@@ -266,7 +296,7 @@ export default function TaxPacketPage() {
                         packet && downloadTaxPacketCsv(packet, taxYearRange.filenameSuffix)
                     }
                     style={{
-                        background: !packet ? "#E5E7EB" : "#19C7C1",
+                        background: !packet ? "#E5E7EB" : COLORS.accent,
                         color: !packet ? "#94A3B8" : "white",
                         border:"none",
                         padding:"12px 18px",
@@ -309,7 +339,7 @@ export default function TaxPacketPage() {
                     <p
                         style={{
                             marginTop:8,
-                            color:"#64748B",
+                            color:COLORS.muted,
                         }}
                     >
                         Current financial period:
@@ -334,13 +364,11 @@ export default function TaxPacketPage() {
                     }}
                 >
 
-                    <option>
-                        2025 / 2026
-                    </option>
-
-                    <option>
-                        2024 / 2025
-                    </option>
+                    {taxYearOptions.map((option) => (
+                        <option key={option}>
+                            {option}
+                        </option>
+                    ))}
 
                 </select>
 
@@ -392,7 +420,7 @@ export default function TaxPacketPage() {
                     value={
                         totals.transactionCount.toString()
                     }
-                    colour="#19C7C1"
+                    colour={COLORS.accent}
                 />
 
 
@@ -424,7 +452,7 @@ export default function TaxPacketPage() {
 
                         <p
                             style={{
-                                color:"#64748B",
+                                color:COLORS.muted,
                             }}
                         >
                             Loading expenses...
@@ -434,7 +462,7 @@ export default function TaxPacketPage() {
 
                         <p
                             style={{
-                                color:"#64748B",
+                                color:COLORS.muted,
                             }}
                         >
                             No expenses recorded yet.
@@ -456,7 +484,7 @@ export default function TaxPacketPage() {
 
                                 <tr
                                     style={{
-                                        background:"#F8FAFC",
+                                        background:COLORS.background,
                                         textAlign:"left",
                                     }}
                                 >
@@ -556,7 +584,7 @@ export default function TaxPacketPage() {
 
                 <p
                     style={{
-                        color:"#64748B",
+                        color:COLORS.muted,
                     }}
                 >
                     Review your preparation progress before generating your packet.
@@ -611,7 +639,7 @@ export default function TaxPacketPage() {
                         style={{
                             height:"100%",
                             width: `${readinessPercent}%`,
-                            background:"#19C7C1",
+                            background:COLORS.accent,
                             borderRadius:999,
                         }}
                     />
@@ -622,7 +650,7 @@ export default function TaxPacketPage() {
                 <p
                     style={{
                         fontSize:14,
-                        color:"#64748B",
+                        color:COLORS.muted,
                         marginTop:8,
                     }}
                 >
@@ -663,7 +691,7 @@ export default function TaxPacketPage() {
 
                 <p
                     style={{
-                        color:"#64748B",
+                        color:COLORS.muted,
                     }}
                 >
                     Supporting documents included in your tax packet.
@@ -749,7 +777,7 @@ function SummaryCard({
             <p
                 style={{
                     margin:0,
-                    color:"#64748B",
+                    color:COLORS.muted,
                     fontSize:14,
                 }}
             >
@@ -881,7 +909,7 @@ function DocumentCard({
 
             <p
                 style={{
-                    color:"#64748B",
+                    color:COLORS.muted,
                     fontSize:14,
                 }}
             >
@@ -910,7 +938,7 @@ const thStyle = {
 
     fontSize:13,
 
-    color:"#64748B",
+    color:COLORS.muted,
 
     fontWeight:600,
 

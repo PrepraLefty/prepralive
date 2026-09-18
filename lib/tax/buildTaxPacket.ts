@@ -5,7 +5,7 @@ type Transaction = {
   user_id: string;
   amount: number;
   type: "income" | "expense";
-  category?: string;
+  category: string;
   description?: string | null;
   transaction_date: string;
   invoice_id?: string | null;

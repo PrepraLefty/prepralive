@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 type InvoiceOption = {
   id: string;
@@ -180,7 +181,7 @@ export default function NewTransaction() {
         <main
             style={{
                 minHeight:"100vh",
-                background:"#F8FAFC",
+                background:COLORS.background,
                 padding:"40px 20px",
             }}
         >
@@ -214,7 +215,7 @@ export default function NewTransaction() {
                     <p
                         style={{
                             marginTop:8,
-                            color:"#64748B",
+                            color:COLORS.muted,
                         }}
                     >
                         Record your income and expenses to keep your finances organised.
@@ -347,7 +348,7 @@ export default function NewTransaction() {
                                 style={{
                                     fontSize:24,
                                     fontWeight:700,
-                                    color:"#64748B",
+                                    color:COLORS.muted,
                                 }}
                             >
                                 £
@@ -420,7 +421,7 @@ export default function NewTransaction() {
                                                     999,
                                                 border:
                                                     category === item
-                                                        ? "1px solid #19C7C1"
+                                                        ? `1px solid ${COLORS.accent}`
                                                         : "1px solid #E5E7EB",
                                                 background:
                                                     category === item
@@ -611,7 +612,7 @@ export default function NewTransaction() {
                             background:
                                 saving
                                     ? "#9ADBD8"
-                                    : "#19C7C1",
+                                    : COLORS.accent,
                             color:"white",
                             fontSize:16,
                             fontWeight:700,

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
+import { COLORS } from "@/lib/colors";
 
 export default function Onboarding() {
   const router = useRouter();
@@ -110,7 +111,7 @@ export default function Onboarding() {
 
   if (authLoading || loading) {
     return (
-      <main style={{ padding: "40px", fontFamily: "Arial" }}>
+      <main style={{ padding: "40px" }}>
         Loading...
       </main>
     );
@@ -121,14 +122,13 @@ export default function Onboarding() {
       style={{
         minHeight: "100vh",
         padding: "40px",
-        fontFamily: "Arial",
-        background: "#F8FBFC",
+        background: COLORS.background,
         maxWidth: "800px",
         margin: "0 auto",
       }}
     >
       <h1>Quick setup</h1>
-      <p style={{ color: "#6B7280" }}>
+      <p style={{ color: COLORS.muted }}>
         Help PREPRA tailor insights to your business
       </p>
 
@@ -146,7 +146,7 @@ export default function Onboarding() {
                 borderRadius: "10px",
                 border:
                   businessType === item
-                    ? "2px solid #19C7C1"
+                    ? `2px solid ${COLORS.accent}`
                     : "1px solid #ccc",
                 background: businessType === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
@@ -187,7 +187,7 @@ export default function Onboarding() {
                 borderRadius: "10px",
                 border:
                   industry === item
-                    ? "2px solid #19C7C1"
+                    ? `2px solid ${COLORS.accent}`
                     : "1px solid #ccc",
                 background: industry === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
@@ -233,7 +233,7 @@ export default function Onboarding() {
                 padding: "10px 14px",
                 borderRadius: "10px",
                 border:
-                  goal === item ? "2px solid #19C7C1" : "1px solid #ccc",
+                  goal === item ? `2px solid ${COLORS.accent}` : "1px solid #ccc",
                 background: goal === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
               }}
@@ -251,7 +251,7 @@ export default function Onboarding() {
           marginTop: "40px",
           width: "100%",
           padding: "14px",
-          background: "#19C7C1",
+          background: COLORS.accent,
           color: "white",
           border: "none",
           borderRadius: "12px",

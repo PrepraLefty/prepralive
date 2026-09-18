@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 type Invoice = {
     id: string;
@@ -149,11 +150,11 @@ export default function InvoicePage() {
     return (
         <>
         <Nav />
-        <main style={{ minHeight: "100vh", background: "#F8FBFC", padding: "40px" }}>
+        <main style={{ minHeight: "100vh", background: COLORS.background, padding: "40px" }}>
 
             <h1>Upload Invoices</h1>
 
-            <p style={{ color: "#6B7280" }}>
+            <p style={{ color: COLORS.muted }}>
                 Store and manage invoices
             </p>
 
@@ -174,7 +175,7 @@ export default function InvoicePage() {
                             left: "10px",
                             top: "50%",
                             transform: "translateY(-50%)",
-                            color: "#6B7280",
+                            color: COLORS.muted,
                         }}
                     >
                         £
@@ -211,7 +212,7 @@ export default function InvoicePage() {
                     style={{
                         padding: "12px 18px",
                         borderRadius: "12px",
-                        background: "#19C7C1",
+                        background: COLORS.accent,
                         color: "white",
                         border: "none",
                         cursor: "pointer",
@@ -271,7 +272,7 @@ export default function InvoicePage() {
                                                         left: "10px",
                                                         top: "50%",
                                                         transform: "translateY(-50%)",
-                                                        color: "#6B7280",
+                                                        color: COLORS.muted,
                                                     }}
                                                 >
                                                     £
@@ -305,7 +306,7 @@ export default function InvoicePage() {
                                                 onClick={() => updateInvoice(invoice.id)}
                                                 style={{
                                                     padding: "6px 10px",
-                                                    background: "#19C7C1",
+                                                    background: COLORS.accent,
                                                     color: "white",
                                                     border: "none",
                                                     borderRadius: "8px",

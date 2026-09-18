@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { COLORS } from "@/lib/colors";
 
 const links = [
     { href: "/transactions", label: "Transactions" },
@@ -64,7 +65,7 @@ export default function Nav() {
                                     fontWeight: 600,
                                     fontSize: 14,
                                     textDecoration: "none",
-                                    color: isActive ? "#19C7C1" : "#64748B",
+                                    color: isActive ? COLORS.accent : COLORS.muted,
                                 }}
                             >
                                 {link.label}
@@ -77,7 +78,7 @@ export default function Nav() {
                         style={{
                             fontWeight: 600,
                             fontSize: 14,
-                            color: "#64748B",
+                            color: COLORS.muted,
                             background: "none",
                             border: "1px solid #E5E7EB",
                             borderRadius: 8,

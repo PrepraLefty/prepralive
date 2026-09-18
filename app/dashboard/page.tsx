@@ -14,6 +14,7 @@ import {
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/useAuth";
 import Nav from "@/components/Nav";
+import { COLORS } from "@/lib/colors";
 
 type Profile = {
     business_type: string;
@@ -34,7 +35,7 @@ type Transaction = {
     created_at: string;
     transaction_date: string;
     title?: string;
-    category?: string | null;
+    category: string;
 };
 
 type Invoice = {
@@ -253,7 +254,7 @@ export default function Dashboard() {
         <main
             style={{
                 minHeight: "100vh",
-                background: "#F8FBFC",
+                background: COLORS.background,
                 padding: "40px",
             }}
         >
@@ -348,7 +349,7 @@ export default function Dashboard() {
                         padding: "12px 18px",
                         borderRadius: "12px",
                         border: "none",
-                        background: "#19C7C1",
+                        background: COLORS.accent,
                         color: "white",
                         fontWeight: 600,
                         cursor: "pointer",
@@ -393,7 +394,7 @@ export default function Dashboard() {
                         padding: "12px 18px",
                         borderRadius: "12px",
                         border: "none",
-                        background: "#19C7C1",
+                        background: COLORS.accent,
                         color: "white",
                         cursor: "pointer",
                         fontWeight: 600,
@@ -454,13 +455,13 @@ export default function Dashboard() {
                             <XAxis dataKey="name" />
                             <YAxis />
                             <Tooltip />
-                            <Line dataKey="revenue" stroke="#19C7C1" />
+                            <Line dataKey="revenue" stroke={COLORS.accent} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
 
                 {/* RECENT ACTIVITY STREAMLINED */}
-                <div style={{ background: "white", padding: 20, borderRadius: 16 }}>
+                <div style={{ background: "white", padding: 20, borderRadius: 16, alignSelf: "start" }}>
                     <div
                         style={{
                             display: "flex",
@@ -506,7 +507,7 @@ export default function Dashboard() {
 
                                     {/* FIXED: category shown for BOTH income + expense */}
                                     {t.category && (
-                                        <span style={{ marginLeft: 8, color: "#6B7280" }}>
+                                        <span style={{ marginLeft: 8, color: COLORS.muted }}>
                                             • {t.category}
                                         </span>
                                     )}
