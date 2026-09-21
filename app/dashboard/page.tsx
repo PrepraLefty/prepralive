@@ -355,7 +355,7 @@ export default function Dashboard() {
                         style={{
                             padding: "10px 14px",
                             borderRadius: "10px",
-                            border: "1px solid #E5E7EB",
+                            border: `1px solid ${COLORS.border}`,
                             background: "white",
                             fontWeight: 600,
                             cursor: "pointer",
@@ -384,7 +384,7 @@ export default function Dashboard() {
                         style={{
                             padding: "10px 14px",
                             borderRadius: "10px",
-                            border: "1px solid #E5E7EB",
+                            border: `1px solid ${COLORS.border}`,
                             background: "white",
                             fontWeight: 600,
                             cursor: "pointer",
@@ -451,7 +451,7 @@ export default function Dashboard() {
                     style={{
                         padding: "12px 18px",
                         borderRadius: "12px",
-                        border: "1px solid #E5E7EB",
+                        border: `1px solid ${COLORS.border}`,
                         background: "white",
                         fontWeight: 600,
                         cursor: "pointer",
@@ -465,7 +465,7 @@ export default function Dashboard() {
                     style={{
                         padding: "12px 18px",
                         borderRadius: "12px",
-                        border: "1px solid #E5E7EB",
+                        border: `1px solid ${COLORS.border}`,
                         background: "white",
                         cursor: "pointer",
                     }}
@@ -545,7 +545,7 @@ export default function Dashboard() {
                                 fontSize: 12,
                                 padding: "6px 10px",
                                 borderRadius: 8,
-                                border: "1px solid #E5E7EB",
+                                border: `1px solid ${COLORS.border}`,
                                 background: "white",
                                 cursor: "pointer",
                             }}

@@ -327,7 +327,7 @@ export default function TransactionsPage() {
                         padding: "10px 14px",
                         borderRadius: 10,
                         border:
-                            "1px solid #E5E7EB",
+                            `1px solid ${COLORS.border}`,
                     }}
                 />
 
@@ -829,7 +829,7 @@ const selectStyle = {
     borderRadius: 10,
 
     border:
-        "1px solid #E5E7EB",
+        `1px solid ${COLORS.border}`,
 
     background: "white",
 
@@ -846,7 +846,7 @@ const paginationButtonStyle = {
     borderRadius: 8,
 
     border:
-        "1px solid #E5E7EB",
+        `1px solid ${COLORS.border}`,
 
     background: "white",
 

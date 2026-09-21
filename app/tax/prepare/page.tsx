@@ -298,7 +298,7 @@ export default function TaxPacketPage() {
                         packet && downloadTaxPacketCsv(packet, taxYearRange.filenameSuffix)
                     }
                     style={{
-                        background: !packet ? "#E5E7EB" : COLORS.accent,
+                        background: !packet ? COLORS.border : COLORS.accent,
                         color: !packet ? "#94A3B8" : "white",
                         border:"none",
                         padding:"12px 18px",
@@ -361,7 +361,7 @@ export default function TaxPacketPage() {
                         padding:"10px 14px",
                         borderRadius:10,
                         border:
-                            "1px solid #E5E7EB",
+                            `1px solid ${COLORS.border}`,
                         background:"white",
                     }}
                 >
@@ -894,7 +894,7 @@ function DocumentCard({
         <div
             style={{
                 border:
-                    "1px solid #E5E7EB",
+                    `1px solid ${COLORS.border}`,
                 padding:16,
                 borderRadius:12,
             }}

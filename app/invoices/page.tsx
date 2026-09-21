@@ -191,7 +191,7 @@ export default function InvoicePage() {
                             padding: "10px 10px 10px 28px",
                             width: "100%",
                             borderRadius: "10px",
-                            border: "1px solid #E5E7EB",
+                            border: `1px solid ${COLORS.border}`,
                         }}
                     />
                 </div>
@@ -286,7 +286,7 @@ export default function InvoicePage() {
                                                         padding: "6px 6px 6px 22px",
                                                         width: "100px",
                                                         borderRadius: "8px",
-                                                        border: "1px solid #E5E7EB",
+                                                        border: `1px solid ${COLORS.border}`,
                                                     }}
                                                 />
                                             </div>
@@ -298,7 +298,7 @@ export default function InvoicePage() {
                                                 style={{
                                                     padding: "6px",
                                                     borderRadius: "8px",
-                                                    border: "1px solid #E5E7EB",
+                                                    border: `1px solid ${COLORS.border}`,
                                                 }}
                                             />
 
@@ -321,7 +321,7 @@ export default function InvoicePage() {
                                                 style={{
                                                     padding: "6px 10px",
                                                     background: "white",
-                                                    border: "1px solid #E5E7EB",
+                                                    border: `1px solid ${COLORS.border}`,
                                                     borderRadius: "8px",
                                                     cursor: "pointer",
                                                 }}
@@ -348,7 +348,7 @@ export default function InvoicePage() {
                                                 style={{
                                                     padding: "6px 10px",
                                                     background: "white",
-                                                    border: "1px solid #E5E7EB",
+                                                    border: `1px solid ${COLORS.border}`,
                                                     borderRadius: "8px",
                                                     cursor: "pointer",
                                                 }}

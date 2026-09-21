@@ -147,7 +147,7 @@ export default function Onboarding() {
                 border:
                   businessType === item
                     ? `2px solid ${COLORS.accent}`
-                    : "1px solid #ccc",
+                    : `1px solid ${COLORS.border}`,
                 background: businessType === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
               }}
@@ -167,7 +167,7 @@ export default function Onboarding() {
               padding: "10px",
               width: "100%",
               borderRadius: "10px",
-              border: "1px solid #ccc",
+              border: `1px solid ${COLORS.border}`,
             }}
           />
         )}
@@ -188,7 +188,7 @@ export default function Onboarding() {
                 border:
                   industry === item
                     ? `2px solid ${COLORS.accent}`
-                    : "1px solid #ccc",
+                    : `1px solid ${COLORS.border}`,
                 background: industry === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
               }}
@@ -208,7 +208,7 @@ export default function Onboarding() {
               padding: "10px",
               width: "100%",
               borderRadius: "10px",
-              border: "1px solid #ccc",
+              border: `1px solid ${COLORS.border}`,
             }}
           />
         )}
@@ -233,7 +233,7 @@ export default function Onboarding() {
                 padding: "10px 14px",
                 borderRadius: "10px",
                 border:
-                  goal === item ? `2px solid ${COLORS.accent}` : "1px solid #ccc",
+                  goal === item ? `2px solid ${COLORS.accent}` : `1px solid ${COLORS.border}`,
                 background: goal === item ? "#E6FFFB" : "white",
                 cursor: "pointer",
               }}

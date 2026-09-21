@@ -92,7 +92,7 @@ export default function Home() {
               color: "#0F172A",
               fontWeight: 700,
               textDecoration: "none",
-              border: "1px solid #E5E7EB",
+              border: `1px solid ${COLORS.border}`,
             }}
           >
             Log in

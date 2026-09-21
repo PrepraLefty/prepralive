@@ -277,7 +277,7 @@ export default function NewTransaction() {
                                     borderColor:
                                         type === "income"
                                             ? "#16A34A"
-                                            : "#E5E7EB",
+                                            : COLORS.border,
                                     color:
                                         type === "income"
                                             ? "#16A34A"
@@ -303,7 +303,7 @@ export default function NewTransaction() {
                                     borderColor:
                                         type === "expense"
                                             ? "#DC2626"
-                                            : "#E5E7EB",
+                                            : COLORS.border,
                                     color:
                                         type === "expense"
                                             ? "#DC2626"
@@ -338,7 +338,7 @@ export default function NewTransaction() {
                                 display:"flex",
                                 alignItems:"center",
                                 border:
-                                    "1px solid #E5E7EB",
+                                    `1px solid ${COLORS.border}`,
                                 borderRadius:12,
                                 paddingLeft:16,
                             }}
@@ -422,7 +422,7 @@ export default function NewTransaction() {
                                                 border:
                                                     category === item
                                                         ? `1px solid ${COLORS.accent}`
-                                                        : "1px solid #E5E7EB",
+                                                        : `1px solid ${COLORS.border}`,
                                                 background:
                                                     category === item
                                                         ? "#E6FFFE"
@@ -678,7 +678,7 @@ const inputStyle = {
     padding:"12px 14px",
 
     border:
-        "1px solid #E5E7EB",
+        `1px solid ${COLORS.border}`,
 
     borderRadius:12,
 
@@ -699,7 +699,7 @@ const toggleStyle = {
     borderRadius:12,
 
     border:
-        "1px solid #E5E7EB",
+        `1px solid ${COLORS.border}`,
 
     fontSize:15,
 

@@ -25,7 +25,7 @@ export default function Nav() {
         <nav
             style={{
                 background: "white",
-                borderBottom: "1px solid #E5E7EB",
+                borderBottom: `1px solid ${COLORS.border}`,
                 padding: "16px 24px",
             }}
         >
@@ -81,7 +81,7 @@ export default function Nav() {
                             fontSize: 14,
                             color: COLORS.muted,
                             background: "none",
-                            border: "1px solid #E5E7EB",
+                            border: `1px solid ${COLORS.border}`,
                             borderRadius: 8,
                             padding: "6px 12px",
                             cursor: "pointer",
